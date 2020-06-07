@@ -1,2 +1,27 @@
-@import "./colors.scss";
-@import "./App.scss";
+/**
+ * Base
+ */
+@import './base/reset.scss';
+@import './base/colors.scss';
+@import './base/margins.scss';
+@import './base/paddings.scss';
+@import './base/utils.scss';
+
+/**
+ * App
+ */
+@import './App.scss';
+
+/**
+ * Components
+ */
+@import './components/Header.scss';
+@import './components/Footer.scss';
+@import './components/Carousel.scss';
+@import './components/Title.scss';
+@import './components/Link.scss';
+
+/**
+ * Views
+ */
+@import './views/Contact.scss';

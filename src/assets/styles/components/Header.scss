@@ -1,0 +1,30 @@
+.Header {
+  background: #000;
+  color: #fff;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+
+  &__pre {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  &__logo {
+    height: 4rem;
+    padding-right: 2rem;
+  }
+
+  &__Title {
+    color: #e2bab8;
+  }
+
+  &__description {
+  }
+
+  &__Link {
+  }
+}
