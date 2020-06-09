@@ -2,7 +2,7 @@ import React from 'react';
 import { Title, Link } from '.';
 import { ARTIST } from '../core/config/constants';
 import { capitalize } from '../core/utils';
-import logo from '../assets/images/dibujos/logo.png';
+import logo from '../assets/images/logo.png';
 
 const Header: React.FC = () => (
   <div className="Header">

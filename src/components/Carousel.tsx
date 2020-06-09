@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { CarouselProps } from '../schemas/Carousel';
+import cat from '../assets/images/black-cat.svg';
 
-const Carousel: React.FC<CarouselProps> = ({ imgs = [] }: CarouselProps) => {
+const initialImg = { src: '', alt: '' };
+
+const Carousel: React.FC<CarouselProps> = ({ imgs = [initialImg] }: CarouselProps) => {
   const [max, setMax] = useState(0);
   const [active, setActive] = useState(0);
-  const [img, setImg] = useState({ src: '', alt: '' });
+  const [img, setImg] = useState(initialImg);
+  const [src, setSrc] = useState(cat);
+  const notFoundMsg = 'No image provided';
 
   useEffect(() => {
     if (imgs.length) {
       setMax(imgs.length - 1);
     }
-  }, [imgs]);
+  }, []);
 
-  useEffect(() => setImg(imgs[active]), [active]);
+  useEffect(() => {
+    setImg(imgs[active]);
+  }, [active]);
+
+  useEffect(() => {
+    if (img.src) {
+      import(`../assets/${img.src}`).then((image) => setSrc(image.default));
+    }
+  }, [img]);
 
   const handleNext = (next: boolean) => {
     const newActive = next ? active + 1 : active - 1;
@@ -31,7 +44,11 @@ const Carousel: React.FC<CarouselProps> = ({ imgs = [] }: CarouselProps) => {
         <div className="Carousel__next" onClick={() => handleNext(false)}>
           {'<'}
         </div>
-        {img.src && <img className="Carousel__img" src={img.src} alt={img.alt} />}
+        {true ? (
+          <img className="Carousel__img" src={src} alt={img.alt} />
+        ) : (
+          <span className="red">{notFoundMsg}</span>
+        )}
         <div className="Carousel__next" onClick={() => handleNext(true)}>
           {'>'}
         </div>

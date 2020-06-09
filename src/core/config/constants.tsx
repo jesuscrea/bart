@@ -20,7 +20,7 @@ export const ARTIST = Object.freeze({
 /**
  * Contact
  */
-export const CONTACT_CONSTANTS = Object.freeze({
+export const CONTACT = Object.freeze({
   URLS: {
     INSTAGRAM: `${URLS.INSTAGRAM}${ARTIST.INSTAGRAM}`,
     CONTACT_US: '#'

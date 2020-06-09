@@ -1,7 +1,7 @@
 /**
  * Contact
  */
-export const CONTACT_LITERALS = {
+export const CONTACT = {
   INSTAGRAM: 'instagram',
   CONTACT_US: 'contact us'
 };
