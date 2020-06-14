@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { CarouselProps } from '../schemas/Carousel';
-import cat from '../assets/images/black-cat.svg';
 
-const initialImg = { src: '', alt: '' };
+const initialImg = { src: '', title: '' };
 
 const Carousel: React.FC<CarouselProps> = ({ imgs = [initialImg] }: CarouselProps) => {
   const [max, setMax] = useState(0);
   const [active, setActive] = useState(0);
   const [img, setImg] = useState(initialImg);
-  const [src, setSrc] = useState(cat);
+  const [nextLeftClick, setNextLeftClick] = useState(false);
+  const [nextRightClick, setNextRightClick] = useState(false);
   const notFoundMsg = 'No image provided';
 
   useEffect(() => {
@@ -21,13 +21,13 @@ const Carousel: React.FC<CarouselProps> = ({ imgs = [initialImg] }: CarouselProp
     setImg(imgs[active]);
   }, [active]);
 
-  useEffect(() => {
-    if (img.src) {
-      import(`../assets/${img.src}`).then((image) => setSrc(image.default));
-    }
-  }, [img]);
-
   const handleNext = (next: boolean) => {
+    if (next) {
+      setNextRightClick(true);
+    } else {
+      setNextLeftClick(true);
+    }
+
     const newActive = next ? active + 1 : active - 1;
     if (newActive > max) {
       setActive(0);
@@ -36,26 +36,42 @@ const Carousel: React.FC<CarouselProps> = ({ imgs = [initialImg] }: CarouselProp
     } else {
       setActive(newActive);
     }
+
+    const timer = setTimeout(() => {
+      setNextRightClick(false);
+      setNextLeftClick(false);
+      clearTimeout(timer);
+    }, 100);
   };
 
   return (
     <div className="Carousel">
+      <div></div>
       <div className="Carousel__main">
-        <div className="Carousel__next" onClick={() => handleNext(false)}>
-          {'<'}
+        <div
+          className={`Carousel__next${!nextLeftClick ? ' Carousel__next--3d' : ''}`}
+          onClick={() => handleNext(false)}
+        >
+          {'🠸'}
         </div>
-        {true ? (
-          <img className="Carousel__img" src={src} alt={img.alt} />
+        {img.src ? (
+          <div className="Carousel__container">
+            <img className="Carousel__img" src={img.src} alt={img.title} />
+            <span className="Carousel__title">{img.title}</span>
+            <div className="Carousel__pagination">
+              {imgs.map((_, index) => (index === active ? '●' : '○'))}
+            </div>
+          </div>
         ) : (
           <span className="red">{notFoundMsg}</span>
         )}
-        <div className="Carousel__next" onClick={() => handleNext(true)}>
-          {'>'}
+        <div
+          className={`Carousel__next${!nextRightClick ? ' Carousel__next--3d' : ''}`}
+          onClick={() => handleNext(true)}
+        >
+          {'🠺'}
         </div>
       </div>
-      <span className="Carousel__active pt--5">
-        {active + 1} / {max + 1}
-      </span>
     </div>
   );
 };
