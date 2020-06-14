@@ -1,6 +1,6 @@
 interface img {
   src: string;
-  alt: string;
+  title: string;
 }
 export interface CarouselProps {
   imgs: Array<img>;
