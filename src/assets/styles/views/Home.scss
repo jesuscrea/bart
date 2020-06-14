@@ -1,0 +1,10 @@
+.Home {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  &__img {
+    height: 70vh;
+  }
+}
