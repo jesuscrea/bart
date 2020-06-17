@@ -1,75 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Pagination } from '.';
+import { LEFT_ARROW, RIGHT_ARROW, IMAGE_NOT_FOUND } from '../core/config/constants';
 import { CarouselProps } from '../schemas/Carousel';
 
-const initialImg = { src: '', title: '' };
-
-const Carousel: React.FC<CarouselProps> = ({ imgs = [initialImg] }: CarouselProps) => {
-  const [max, setMax] = useState(0);
+const Carousel: React.FC<CarouselProps> = ({ imgs = [] }: CarouselProps) => {
   const [active, setActive] = useState(0);
-  const [img, setImg] = useState(initialImg);
-  const [nextLeftClick, setNextLeftClick] = useState(false);
-  const [nextRightClick, setNextRightClick] = useState(false);
-  const notFoundMsg = 'No image provided';
 
-  useEffect(() => {
-    if (imgs.length) {
-      setMax(imgs.length - 1);
-    }
-  }, []);
+  const getValidActive = (value: number) =>
+    value > imgs.length - 1 ? 0 : value < 0 ? imgs.length - 1 : value;
+  const getNewActive = (forward?: boolean) => (forward ? active + 1 : active - 1);
 
-  useEffect(() => {
-    setImg(imgs[active]);
-  }, [active]);
-
-  const handleNext = (next: boolean) => {
-    if (next) {
-      setNextRightClick(true);
-    } else {
-      setNextLeftClick(true);
-    }
-
-    const newActive = next ? active + 1 : active - 1;
-    if (newActive > max) {
-      setActive(0);
-    } else if (newActive < 0) {
-      setActive(max);
-    } else {
-      setActive(newActive);
-    }
-
-    const timer = setTimeout(() => {
-      setNextRightClick(false);
-      setNextLeftClick(false);
-      clearTimeout(timer);
-    }, 100);
+  const handleClick = (forward?: boolean): void => {
+    const newActive = getValidActive(getNewActive(forward));
+    setActive(newActive);
   };
 
   return (
     <div className="Carousel">
-      <div></div>
       <div className="Carousel__main">
-        <div
-          className={`Carousel__next${!nextLeftClick ? ' Carousel__next--3d' : ''}`}
-          onClick={() => handleNext(false)}
-        >
-          {'🠸'}
+        <div className="Carousel__next" onClick={() => handleClick()}>
+          {LEFT_ARROW}
         </div>
-        {img.src ? (
+        {imgs.length ? (
           <div className="Carousel__container">
-            <img className="Carousel__img" src={img.src} alt={img.title} />
-            <span className="Carousel__title">{img.title}</span>
-            <div className="Carousel__pagination">
-              {imgs.map((_, index) => (index === active ? '●' : '○'))}
-            </div>
+            <img className="Carousel__img" src={imgs[active].src} alt={imgs[active].title} />
+            <span className="Carousel__title">{imgs[active].title}</span>
+            <Pagination length={imgs.length} active={active} />
           </div>
         ) : (
-          <span className="red">{notFoundMsg}</span>
+          <span className="red">{IMAGE_NOT_FOUND}</span>
         )}
-        <div
-          className={`Carousel__next${!nextRightClick ? ' Carousel__next--3d' : ''}`}
-          onClick={() => handleNext(true)}
-        >
-          {'🠺'}
+        <div className="Carousel__next" onClick={() => handleClick(true)}>
+          {RIGHT_ARROW}
         </div>
       </div>
     </div>

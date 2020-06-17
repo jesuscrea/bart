@@ -1,14 +1,14 @@
 import React from 'react';
 import './assets/styles/index.scss';
-import { Footer, Header } from './components';
-import { Contact, Drawings } from './views';
+import { Footer } from './components';
+import { Home, Drawings, Contact } from './views';
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Header />
+      <Home />
       <Drawings />
-      <Contact />
+      {/* <Contact /> */}
       <Footer />
     </div>
   );

@@ -21,14 +21,15 @@
   }
 
   &__img {
-    width: 55vh;
+    max-height: 70vh;
+    max-width: 60vh;
     padding-bottom: 2rem;
   }
 
   &__next {
     font-size: 4rem;
     cursor: pointer;
-    &--3d {
+    &--webkit {
       -webkit-transform: scale(1.1);
       -moz-transform: scale(1.1);
       -ms-transform: scale(1.1);
