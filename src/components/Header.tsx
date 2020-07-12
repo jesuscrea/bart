@@ -1,13 +1,27 @@
-import React from 'react';
-import { Title } from '.';
+import React, { useEffect, useState } from 'react';
 import logo from '../assets/images/logo.png';
-import { ARTIST } from '../core/config/constants';
+import Vivus from 'vivus';
+import sign from '../assets/images/firma.svg';
 
-const Header: React.FC = () => (
-  <div className="Header">
-    <img className="Header__logo" src={logo} alt="logo" />
-    <Title className="Header__Title" title={ARTIST.TITLE} />
-  </div>
-);
+const Header: React.FC = () => {
+  const [foo, setFoo] = useState(0);
+  useEffect(() => {
+    // setTimeout(function () {
+    //   new Vivus('sign', {
+    //     type: 'oneByOne',
+    //     duration: 300,
+    //     file: sign
+    //   });
+    // }, 500);
+  }, [foo]);
+  return (
+    <div className="Header">
+      <img className="Header__logo" src={logo} alt="logo" />
+      <img id="sign" className="Header__sign" src={sign} alt="sign" />
+      {/* <div id="sign" className="Header__sign"></div> */}
+      <button onClick={() => setFoo(foo + 1)}>foo</button>
+    </div>
+  );
+};
 
 export default Header;

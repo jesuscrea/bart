@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { Pagination } from '.';
-import { LEFT_ARROW, RIGHT_ARROW, IMAGE_NOT_FOUND } from '../core/config/constants';
 import { CarouselProps } from '../schemas/Carousel';
 
 const Carousel: React.FC<CarouselProps> = ({ imgs = [] }: CarouselProps) => {
@@ -17,22 +15,13 @@ const Carousel: React.FC<CarouselProps> = ({ imgs = [] }: CarouselProps) => {
 
   return (
     <div className="Carousel">
-      <div className="Carousel__main">
-        <div className="Carousel__next" onClick={() => handleClick()}>
-          {LEFT_ARROW}
-        </div>
-        {imgs.length ? (
-          <div className="Carousel__container">
-            <img className="Carousel__img" src={imgs[active].src} alt={imgs[active].title} />
-            <span className="Carousel__title">{imgs[active].title}</span>
-            <Pagination length={imgs.length} active={active} />
-          </div>
-        ) : (
-          <span className="red">{IMAGE_NOT_FOUND}</span>
-        )}
-        <div className="Carousel__next" onClick={() => handleClick(true)}>
-          {RIGHT_ARROW}
-        </div>
+      <div className="Carousel__container">
+        {imgs.length &&
+          imgs.map((img: any, index: any) => (
+            <div key={`carousel-img-${index}`} className="Carousel__img__container">
+              <img className="Carousel__img" src={img.src} alt={img.title} />
+            </div>
+          ))}
       </div>
     </div>
   );
