@@ -8,7 +8,7 @@ const App: React.FC = () => {
     <div className="App">
       <Home />
       {/* <Drawings /> */}
-      {/* <Contact /> */}
+      <Contact />
       <Footer />
     </div>
   );
