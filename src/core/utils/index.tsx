@@ -1,6 +1,6 @@
 export function capitalize(word = ''): string {
-  const [firstLetter] = word as any;
-  return firstLetter ? firstLetter.toUpperCase().concat(word.slice(1)) : '';
+  const [first, ...rest] = word.slice();
+  return first.toUpperCase().concat(...rest);
 }
 
 export function formClassName(...classNamePieces: Array<string>): string {
