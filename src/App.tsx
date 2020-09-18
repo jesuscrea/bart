@@ -1,16 +1,14 @@
 import React from 'react';
 import './assets/styles/index.scss';
-import { Footer } from './components';
-import { Home, Drawings, Contact } from './views';
+import { Home, Contact } from './views';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Home />
-      {/* <Drawings /> */}
-      <Contact />
-      <Footer />
-    </div>
+    <Router>
+      <Route path="/" exact component={Home} />
+      <Route path="/contact" component={Contact} />
+    </Router>
   );
 };
 export default App;

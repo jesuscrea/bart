@@ -1,5 +1,5 @@
 export function capitalize(word = ''): string {
-  const [first, ...rest] = word.slice();
+  const [first, ...rest] = word.split('');
   return first.toUpperCase().concat(...rest);
 }
 
