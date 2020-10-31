@@ -1,7 +1,7 @@
-interface img {
+export interface Image {
   src: string;
   title: string;
 }
 export interface CarouselProps {
-  imgs: Array<img>;
+  images: Array<Image>;
 }

@@ -1,5 +1,5 @@
 import Contact from './Contact';
-import Drawings from './Drawings';
+import Gallery from './Gallery';
 import Home from './Home';
 
-export { Contact, Drawings, Home };
+export { Contact, Gallery, Home };

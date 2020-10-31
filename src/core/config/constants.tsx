@@ -2,8 +2,8 @@
  * General
  */
 export const IMAGE_NOT_FOUND = 'Image not found';
-export const LEFT_ARROW = '🠸';
-export const RIGHT_ARROW = '🠺';
+export const LEFT_ARROW = '<';
+export const RIGHT_ARROW = '>';
 
 /**
  * URLs
